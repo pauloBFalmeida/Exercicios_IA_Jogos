@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bne5q02s8trif"]
+
+[ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_orb4b"]
+[ext_resource type="Script" uid="uid://dq80lkb0fgyy8" path="res://aulas/aula2/aula_2_personagem.gd" id="2_8xd02"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8xd02"]
+resource_local_to_scene = true
+size = Vector3(0.15, 1, 0.15)
+
+[sub_resource type="TorusMesh" id="TorusMesh_7nmhf"]
+resource_local_to_scene = true
+inner_radius = 1.0
+outer_radius = 1.25
+ring_segments = 4
+
+[node name="Personagem" unique_id=1405902387 instance=ExtResource("1_orb4b")]
+script = ExtResource("2_8xd02")
+patrulhar_distancia_spawn = 20
+fugir_threshold_vida = 40
+ataque_range = 2
+perseguir_range = 15
+velocidade_fugir = 5.0
+velocidade_perseguir = 3.0
+velocidade_patrulhar = 4.0
+
+[node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
+mesh = SubResource("BoxMesh_8xd02")
+
+[node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=319886117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.602667, 0)
+billboard = 1
+text = "acao:"
+
+[node name="MeshAlcanceVisao" type="MeshInstance3D" parent="." index="6" unique_id=1071008393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999998, 0)
+mesh = SubResource("TorusMesh_7nmhf")
+
+[node name="MostrarWaypointPatrulha" type="Node" parent="." index="7" unique_id=43126788]
+editor_description = "Truque para manter a posição da sphere global, se fosse só filho do personagem iria se mover junto com ele"
+
+[node name="Sphere3D" type="CSGSphere3D" parent="MostrarWaypointPatrulha" index="0" unique_id=2055555484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2.5)
+radius = 0.3

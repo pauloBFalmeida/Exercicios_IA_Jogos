@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cqcq5m0e8de7i"]
+
+[ext_resource type="PackedScene" uid="uid://bvxrw3pe6luce" path="res://comum/locais/chao.tscn" id="1_s1ae2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn85c"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_pblid"]
+sky_material = SubResource("ProceduralSkyMaterial_yn85c")
+
+[sub_resource type="Environment" id="Environment_t02xd"]
+background_mode = 2
+sky = SubResource("Sky_pblid")
+
+[node name="MapaBasico" type="Node3D" unique_id=772933934]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1856231839]
+environment = SubResource("Environment_t02xd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1216107798]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Chao" parent="." unique_id=1693442064 instance=ExtResource("1_s1ae2")]
+
+[node name="LabelOrigem" type="Label3D" parent="." unique_id=1385960243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+billboard = 1
+outline_modulate = Color(0.5372549, 0.49411765, 0, 1)
+text = "Origem"

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdq2wcvxvaiuf"]
+
+[ext_resource type="Script" uid="uid://dxm8ese5jirtf" path="res://comum/sistemas/sistema_vida.gd" id="1_ueyti"]
+
+[node name="SistemaVida" type="Node" unique_id=1411459166]
+script = ExtResource("1_ueyti")

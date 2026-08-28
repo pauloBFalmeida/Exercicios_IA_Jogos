@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b6ypxm1fkqw11"]
+
+[ext_resource type="Script" uid="uid://bemac4yo31b40" path="res://comum/personagem/personagem.gd" id="1_2s6sl"]
+[ext_resource type="PackedScene" uid="uid://cdq2wcvxvaiuf" path="res://comum/sistemas/sistema_vida.tscn" id="2_u3068"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkp1i"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p4ixc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtv0d"]
+albedo_color = Color(0, 0.45882353, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_smq05"]
+resource_local_to_scene = true
+size = Vector3(0.15, 1, 0.15)
+
+[node name="Personagem" type="CharacterBody3D" unique_id=1405902387]
+script = ExtResource("1_2s6sl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=901318464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rkp1i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1243407999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_p4ixc")
+surface_material_override/0 = SubResource("StandardMaterial3D_qtv0d")
+
+[node name="Rosto" type="Node3D" parent="MeshInstance3D" unique_id=1546902572]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.371139e-08, 0.5, -0.5)
+
+[node name="Sphere3DOlhoEsq" type="CSGSphere3D" parent="MeshInstance3D/Rosto" unique_id=312366091]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.15000002, 0, -0.050000012)
+radius = 0.15
+rings = 12
+
+[node name="Sphere3DOlhoDir" type="CSGSphere3D" parent="MeshInstance3D/Rosto" unique_id=1096106731]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.14999999, 0, -0.050000012)
+radius = 0.15
+rings = 12
+
+[node name="MaoBastao" type="Node3D" parent="." unique_id=1567190570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, 0)
+
+[node name="MeshBastao" type="MeshInstance3D" parent="MaoBastao" unique_id=13564532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07677102, 0.4528153, -0.13665104)
+mesh = SubResource("BoxMesh_smq05")
+
+[node name="SistemaVida" parent="." unique_id=1411459166 instance=ExtResource("2_u3068")]
+
+[node name="Label3D_vida" type="Label3D" parent="." unique_id=49904894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+billboard = 1
+text = "vida:"

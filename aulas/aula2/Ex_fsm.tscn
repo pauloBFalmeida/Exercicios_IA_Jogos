@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://vm5apul65gpe"]
+
+[ext_resource type="Script" uid="uid://8vyuhyx0xogt" path="res://addons/freecam_3D/freecam.gd" id="1_3cyc6"]
+[ext_resource type="PackedScene" uid="uid://cqcq5m0e8de7i" path="res://comum/locais/mapa_basico.tscn" id="1_j7ahw"]
+[ext_resource type="PackedScene" uid="uid://bne5q02s8trif" path="res://aulas/aula2/aula_2_personagem.tscn" id="3_j7ahw"]
+
+[node name="ExercicoFSM" type="Node3D" unique_id=1026498798]
+
+[node name="MapaBasico" parent="." unique_id=772933934 instance=ExtResource("1_j7ahw")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1629810822]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071068, 0, -0.7071068, 0.70710677, 0, 4.160489, 3.6889205)
+script = ExtResource("1_3cyc6")
+
+[node name="PersonagemBlue" parent="." unique_id=1405902387 node_paths=PackedStringArray("outro_personagem") instance=ExtResource("3_j7ahw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+outro_personagem = NodePath("../PersonagemRed")
+
+[node name="PersonagemRed" parent="." unique_id=614467689 node_paths=PackedStringArray("outro_personagem") instance=ExtResource("3_j7ahw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+outro_personagem = NodePath("../PersonagemBlue")
+cor = Color(0.9998743, 0.39784005, 0.32939905, 1)

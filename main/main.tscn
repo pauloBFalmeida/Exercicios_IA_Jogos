@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://tttv8duftpic"]
+
+[ext_resource type="Script" uid="uid://cviub1fdx6jjt" path="res://main/main.gd" id="1_53q0u"]
+[ext_resource type="PackedScene" uid="uid://vm5apul65gpe" path="res://aulas/aula2/Ex_fsm.tscn" id="2_xwkvk"]
+
+[node name="Main" type="Control" unique_id=1479390267]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_53q0u")
+exercicios_descricao = Dictionary[PackedScene, String]({
+ExtResource("2_xwkvk"): "Finate State Machine"
+})
+
+[node name="background" type="ColorRect" parent="." unique_id=337283492]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38499516, 0.4291549, 0.3570428, 1)
+
+[node name="MeioSize" type="Control" parent="." unique_id=2067061041]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -284.0
+offset_right = 344.0
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelTitulo" type="Label" parent="MeioSize" unique_id=775787042]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.5
+offset_right = 21.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 55
+text = "Aulas"
+
+[node name="ButtonSair" type="Button" parent="MeioSize" unique_id=1580276933]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.5
+offset_top = -50.0
+offset_right = 31.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Sair"
+
+[node name="GridSize" type="Control" parent="MeioSize" unique_id=1060424078]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -172.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="MeioSize/GridSize" unique_id=2094877192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 20
+columns = 5
+
+[connection signal="pressed" from="MeioSize/ButtonSair" to="." method="_on_button_sair_pressed"]
