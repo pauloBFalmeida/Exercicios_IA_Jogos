@@ -2,6 +2,7 @@ extends Node
 class_name SistemaVida
 
 signal atualizou_vida(vida_atual: float)
+signal levou_dano
 
 @export var pode_regenerar_vida: bool = true
 ## quantidade de vida ganha por segundo
@@ -13,6 +14,7 @@ func perder(quantidade: float) -> void:
 	vida -= quantidade
 	if vida < 0: vida = 0
 	
+	levou_dano.emit()
 	atualizou_vida.emit(vida)
 
 func ganhar(quantidade: float) -> void:

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cg5spb0so1oi1"]
+
+[ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_ec2bq"]
+[ext_resource type="Script" uid="uid://c7m8re1uj6opj" path="res://aulas/aula3/partes/aula_3_personagem_guarda.gd" id="2_uqfjc"]
+[ext_resource type="PackedScene" uid="uid://bt67g26klns22" path="res://addons/kenney_castle-kit/Models/GLB format/flag-banner-short.glb" id="3_qm7lw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqfjc"]
+resource_local_to_scene = true
+size = Vector3(0.15, 1, 0.15)
+
+[node name="PersonagemGuarda" unique_id=1405902387 instance=ExtResource("1_ec2bq")]
+script = ExtResource("2_uqfjc")
+
+[node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
+mesh = SubResource("BoxMesh_uqfjc")
+
+[node name="Label3D_avisado" type="Label3D" parent="." index="5" unique_id=556767583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.474579, 0)
+visible = false
+billboard = 1
+modulate = Color(0.46514255, 0.5757308, 1, 1)
+text = "Soube do Roubo"
+
+[node name="Label3D_Titulo" type="Label3D" parent="." index="6" unique_id=1673892094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8340626, 0)
+billboard = 1
+text = "Guarda"
+
+[node name="flag-banner-short2" parent="." index="7" unique_id=4816099 instance=ExtResource("3_qm7lw")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.37289476, -0.5108042)

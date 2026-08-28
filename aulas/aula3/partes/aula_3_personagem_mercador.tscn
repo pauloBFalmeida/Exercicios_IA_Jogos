@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://b53b03gubw7xn"]
+
+[ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_l64xm"]
+[ext_resource type="Script" uid="uid://bd7enx8lt6t8r" path="res://aulas/aula3/partes/aula_3_personagem_mercador.gd" id="2_u17q1"]
+[ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/partes/fsm.gd" id="3_jc3yu"]
+[ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/partes/bt.gd" id="4_e3xno"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u7wxf"]
+resource_local_to_scene = true
+size = Vector3(0.15, 1, 0.15)
+
+[sub_resource type="TorusMesh" id="TorusMesh_l64xm"]
+resource_local_to_scene = true
+inner_radius = 1.0
+outer_radius = 1.25
+ring_segments = 4
+
+[node name="PersonagemMercador" unique_id=1405902387 instance=ExtResource("1_l64xm")]
+script = ExtResource("2_u17q1")
+cerebro = "FSM"
+velocidade = 5.0
+visao_range = 5
+cor = Color(0.89158136, 0.74556154, 0.34056458, 1)
+
+[node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
+mesh = SubResource("BoxMesh_u7wxf")
+
+[node name="SistemaVida" parent="." index="3" unique_id=1411459166]
+regenerar_vida_seg = 3.0
+
+[node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=891523267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45484, 0)
+billboard = 1
+text = "acao: "
+
+[node name="Label3D_Titulo" type="Label3D" parent="." index="6" unique_id=1161856396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8340626, 0)
+billboard = 1
+text = "Mercador"
+
+[node name="Label3D_Vender" type="Label3D" parent="." index="7" unique_id=929990489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.248904, -1.2298646)
+visible = false
+billboard = 1
+text = "Quer comprar algo?"
+
+[node name="TimerVender" type="Timer" parent="Label3D_Vender" index="0" unique_id=982979164]
+wait_time = 0.1
+one_shot = true
+
+[node name="TimerEscondido" type="Timer" parent="." index="8" unique_id=906395941]
+wait_time = 10.0
+one_shot = true
+
+[node name="MeshAlcanceVisao" type="MeshInstance3D" parent="." index="9" unique_id=1314693939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999998, 0)
+mesh = SubResource("TorusMesh_l64xm")
+
+[node name="FSM" type="Node" parent="." index="10" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
+script = ExtResource("3_jc3yu")
+mercador = NodePath("..")
+
+[node name="BT" type="Node" parent="." index="11" unique_id=2098172617 node_paths=PackedStringArray("mercador")]
+script = ExtResource("4_e3xno")
+mercador = NodePath("..")

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_orb4b"]
 [ext_resource type="Script" uid="uid://dq80lkb0fgyy8" path="res://aulas/aula2/partes/aula_2_personagem.gd" id="2_8xd02"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_8xd02"]
+[sub_resource type="BoxMesh" id="BoxMesh_vnbvx"]
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
@@ -24,7 +24,7 @@ velocidade_perseguir = 3.0
 velocidade_patrulhar = 4.0
 
 [node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
-mesh = SubResource("BoxMesh_8xd02")
+mesh = SubResource("BoxMesh_vnbvx")
 
 [node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=319886117]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.602667, 0)

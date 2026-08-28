@@ -117,4 +117,7 @@ func _animacao_levar_dano() -> void:
 		 Vector3.ONE,
 		.2
 	).from_current()
-	
+
+func look_at_horizontal(target_global_pos: Vector3) -> void:
+	target_global_pos.y = global_position.y
+	look_at(target_global_pos, Vector3.UP)
