@@ -1,11 +1,11 @@
 extends Control
 
-## Para cada cena de exercicio tem uma descricao
-@export var exercicios_descricao : Dictionary[PackedScene, String]
+@export var exercicios_res : ExerciciosRes
 
 @onready var grid_container: GridContainer = $MeioSize/GridSize/GridContainer
 
 func _ready() -> void:
+	var exercicios_descricao: Dictionary[PackedScene, String] = exercicios_res.exercicios_descricao
 	for cena in exercicios_descricao.keys():
 		var txt := exercicios_descricao[cena]
 		var btn := Button.new()
