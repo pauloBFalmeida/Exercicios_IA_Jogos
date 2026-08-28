@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://rrc3wp7siq5e"]
+
+[ext_resource type="PackedScene" uid="uid://k6jv7sthaltr" path="res://addons/kenney_castle-kit/Models/GLB format/tower-square-mid-open-simple.glb" id="1_jq0xy"]
+[ext_resource type="PackedScene" uid="uid://bh6u08n2uw3qt" path="res://addons/kenney_castle-kit/Models/GLB format/tower-square-top-roof-high.glb" id="2_258fx"]
+
+[node name="Casa" type="Node3D" unique_id=692387879]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="tower-square-mid-open-simple2" parent="." unique_id=578638217 instance=ExtResource("1_jq0xy")]
+transform = Transform3D(1, 0, 0, 0, -1.15, 1.509958e-07, 0, -1.7364516e-07, -1, 0, 1, 0)
+
+[node name="tower-square-top-roof-high2" parent="." unique_id=1211943405 instance=ExtResource("2_258fx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
