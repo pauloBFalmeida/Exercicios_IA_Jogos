@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8vyuhyx0xogt" path="res://addons/freecam_3D/freecam.gd" id="1_3cyc6"]
 [ext_resource type="PackedScene" uid="uid://cqcq5m0e8de7i" path="res://comum/locais/mapa_basico.tscn" id="1_j7ahw"]
-[ext_resource type="PackedScene" uid="uid://bne5q02s8trif" path="res://aulas/aula2/aula_2_personagem.tscn" id="3_j7ahw"]
+[ext_resource type="PackedScene" uid="uid://bne5q02s8trif" path="res://aulas/aula2/partes/aula_2_personagem.tscn" id="3_j7ahw"]
 
 [node name="ExercicioFSM" type="Node3D" unique_id=1026498798]
 

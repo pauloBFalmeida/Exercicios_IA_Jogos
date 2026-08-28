@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bne5q02s8trif"]
 
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_orb4b"]
-[ext_resource type="Script" uid="uid://dq80lkb0fgyy8" path="res://aulas/aula2/aula_2_personagem.gd" id="2_8xd02"]
+[ext_resource type="Script" uid="uid://dq80lkb0fgyy8" path="res://aulas/aula2/partes/aula_2_personagem.gd" id="2_8xd02"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8xd02"]
 resource_local_to_scene = true
