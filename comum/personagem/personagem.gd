@@ -84,12 +84,16 @@ func mover_direcao_oposta_posicao_global(global_pos: Vector3, velocidade: float)
 	mover(direcao, velocidade)
 
 ## Retorna True se a distancia ate objeto for menor que distancia_max_pow 
-## (distancia ao quadradro valor comum de [code] distancia_max_pow = 1[/code])
+## [br] Distancia ao quadradro, valor padrao de [code]1 metro[/code].
+## Entao para verificar se o objeto esta a menos de [code]2 metros[/code] de distancia,
+## passar [code] distancia_max_pow = 4[/code]
 func esta_perto_objeto(objeto: Node3D, distancia_max_pow: int = 1) -> bool:
 	return esta_perto_posicao_global(objeto.global_position, distancia_max_pow)
 
 ## Retorna True se a distancia ate posicao global for menor que distancia_max_pow 
-## (distancia ao quadradro valor comum de [code] distancia_max_pow = 1[/code])
+## [br] Distancia ao quadradro, valor padrao de [code]1 metro[/code]
+## Entao para verificar se o objeto esta a menos de [code]2 metros[/code] de distancia,
+## passar [code] distancia_max_pow = 4[/code]
 func esta_perto_posicao_global(global_pos: Vector3, distancia_max_pow: int = 1) -> bool:
 	var distancia := global_position.distance_squared_to(global_pos)
 	return distancia < distancia_max_pow

@@ -86,7 +86,7 @@ func _on_item_list_cerebros_item_selected(index: int) -> void:
 
 func _process(_delta: float) -> void:	
 	# TODO: melhorar avisar o guarda
-	if global_position.distance_squared_to(guarda.global_position) < 4:
+	if esta_perto_objeto(guarda, 4):
 		guarda.avisar_roubo()
 		avisou_guarda_ticket = true
 
