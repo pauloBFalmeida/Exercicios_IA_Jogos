@@ -2,7 +2,7 @@ extends Control
 
 @export var free_cam: Freecam3D
 ## Nodo pai de toda a cena
-@export var cena: Node
+@onready var cena: Node = get_tree().current_scene
 
 @onready var button_cam_seguir_jog: Button = $ButtonCamSeguirJog
 

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://caumhll2fvjtl"]
+
+[ext_resource type="PackedScene" uid="uid://b1w1yn4c4uls8" path="res://comum/personagem/jogador/jogador.tscn" id="1_mgtdw"]
+[ext_resource type="Script" uid="uid://bdo81qu3u0wbl" path="res://aulas/aula3/partes/hud.gd" id="2_4o4a5"]
+[ext_resource type="Script" uid="uid://8vyuhyx0xogt" path="res://addons/freecam_3D/freecam.gd" id="3_sjfp5"]
+
+[node name="JogadorComCamera" type="Node3D" unique_id=1150373858]
+
+[node name="Jogador" parent="." unique_id=1405902387 node_paths=PackedStringArray("free_cam") instance=ExtResource("1_mgtdw")]
+velocidade = 8.0
+dano_ataque = 25
+free_cam = NodePath("Camera3D")
+
+[node name="Hud" type="Control" parent="Jogador" unique_id=1217739748 node_paths=PackedStringArray("free_cam")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4o4a5")
+free_cam = NodePath("../Camera3D")
+
+[node name="ButtonCamSeguirJog" type="Button" parent="Jogador/Hud" unique_id=1292535412]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -272.0
+offset_top = -50.0
+offset_right = -33.0
+offset_bottom = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+toggle_mode = true
+text = "Camera Seguindo Jogador: On"
+
+[node name="Camera3D" type="Camera3D" parent="Jogador" unique_id=276196200]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 4, 4)
+current = true
+script = ExtResource("3_sjfp5")
+
+[connection signal="toggled" from="Jogador/Hud/ButtonCamSeguirJog" to="Jogador/Hud" method="_on_button_cam_seguir_jog_toggled"]
