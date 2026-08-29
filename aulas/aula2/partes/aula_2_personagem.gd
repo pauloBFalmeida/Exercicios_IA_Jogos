@@ -97,8 +97,7 @@ func patrulhar():
 		_posicionar_waypoint_patrulha()
 	
 	# se tiver chego no waypoint
-	var distancia_waypoint := global_position.distance_to(waypoint_patrulhar) 
-	if distancia_waypoint < 1:
+	if esta_perto_posicao_global(waypoint_patrulhar):
 		# remove o waypoint atual
 		waypoint_patrulhar = Vector3.INF
 		# para de se mover
@@ -106,8 +105,7 @@ func patrulhar():
 		return
 	
 	# anda na direcao do waypoint
-	var direcao = global_position.direction_to(waypoint_patrulhar)
-	mover(direcao, velocidade_patrulhar)
+	mover_direcao_posicao_global(waypoint_patrulhar, velocidade_patrulhar)
 
 func _posicionar_waypoint_patrulha() -> void:
 	# posicao do waypoint proximo do spawn
@@ -120,8 +118,7 @@ func _posicionar_waypoint_patrulha() -> void:
 	sphere_waypoint_patrulha.global_position = waypoint_patrulhar
 
 func perseguir():
-	var direcao = global_position.direction_to(outro_personagem.global_position)
-	mover(direcao, velocidade_perseguir)
+	mover_direcao_objeto(outro_personagem, velocidade_perseguir)
 
 func atacar():
 	parar_mover()
@@ -142,8 +139,4 @@ func atacar():
 	)
 
 func fugir():
-	var direcao = global_position.direction_to(outro_personagem.global_position)
-	# direcao horizontal oposta do outro personagem
-	direcao.x = -direcao.x
-	direcao.z = -direcao.z
-	mover(direcao, velocidade_fugir)
+	mover_direcao_oposta_objeto(outro_personagem, velocidade_fugir)

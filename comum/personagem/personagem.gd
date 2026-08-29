@@ -17,6 +17,11 @@ var mover_velocidade: float = 0.0
 var mover_direcao := Vector3.ZERO
 
 func _ready() -> void:
+	_ready_cor()
+	# conecta o sinal de atualizar a vida com atualizar a label
+	sistema_vida.atualizou_vida.connect(_atualizar_mostrar_vida)
+
+func _ready_cor() -> void:
 	# duplica o material do personagem 
 	# porque se nao fizer isso, ao criar multiplos personagens, 
 	# eles vao compartilhar o mesmo material (como se eles estivessem linkados), 
@@ -30,9 +35,6 @@ func _ready() -> void:
 	
 	# coloca o mesmo material no bastao
 	mesh_bastao.set_surface_override_material(0, material)
-	
-	# conecta o sinal de atualizar a vida com atualizar a label
-	sistema_vida.atualizou_vida.connect(_atualizar_mostrar_vida)
 
 func _physics_process(delta: float) -> void:
 	# se move na direcao passada
@@ -44,6 +46,8 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+## Move o personagem na direcao (Vector3 tem que estar normalizado), com velocidade
+## [br] e olha na direcao do movimento se possivel
 func mover(direcao: Vector3, velocidade: float) -> void:
 	# olha para direcao que esta indo
 	if not direcao.is_zero_approx():
@@ -52,9 +56,49 @@ func mover(direcao: Vector3, velocidade: float) -> void:
 	mover_velocidade = velocidade
 	mover_direcao    = direcao
 
+## Para o movimento do personagem
 func 	parar_mover() -> void:
 	mover_velocidade = 0
 	mover_direcao    = Vector3.ZERO
+
+
+## Move o personagem na direcao de objeto (Node3D), com velocidade
+func mover_direcao_objeto(objeto: Node3D, velocidade: float) -> void:
+	mover_direcao_posicao_global(objeto.global_position, velocidade)
+
+## Move o personagem na direcao oposta da posicao global (Vector3), com velocidade
+func mover_direcao_posicao_global(global_pos: Vector3, velocidade: float) -> void:
+	var direcao := global_position.direction_to(global_pos)
+	mover(direcao, velocidade)
+
+## Move o personagem na direcao oposta de objeto (Node3D), com velocidade
+func mover_direcao_oposta_objeto(objeto: Node3D, velocidade: float) -> void:
+	mover_direcao_oposta_posicao_global(objeto.global_position, velocidade)
+
+## Move o personagem na direcao oposta da posicao global (Vector3), com velocidade
+func mover_direcao_oposta_posicao_global(global_pos: Vector3, velocidade: float) -> void:
+	var direcao := global_position.direction_to(global_pos)
+	# direcao horizontal oposta
+	direcao.x = -direcao.x
+	direcao.z = -direcao.z
+	mover(direcao, velocidade)
+
+## Retorna True se a distancia ate objeto for menor que distancia_max_pow 
+## (distancia ao quadradro valor comum de [code] distancia_max_pow = 1[/code])
+func esta_perto_objeto(objeto: Node3D, distancia_max_pow: int = 1) -> bool:
+	return esta_perto_posicao_global(objeto.global_position, distancia_max_pow)
+
+## Retorna True se a distancia ate posicao global for menor que distancia_max_pow 
+## (distancia ao quadradro valor comum de [code] distancia_max_pow = 1[/code])
+func esta_perto_posicao_global(global_pos: Vector3, distancia_max_pow: int = 1) -> bool:
+	var distancia := global_position.distance_squared_to(global_pos)
+	return distancia < distancia_max_pow
+
+## Rotaciona para olhar para alvo, horizontalmente (em torno do eixo Y)
+func look_at_horizontal(target_global_pos: Vector3) -> void:
+	target_global_pos.y = global_position.y
+	look_at(target_global_pos, Vector3.UP)
+
 
 ## Animacao de ataque do bastao
 ## [br] Retorna verdadeiro apos terminar o movimento de ataque,
@@ -117,7 +161,3 @@ func _animacao_levar_dano() -> void:
 		 Vector3.ONE,
 		.2
 	).from_current()
-
-func look_at_horizontal(target_global_pos: Vector3) -> void:
-	target_global_pos.y = global_position.y
-	look_at(target_global_pos, Vector3.UP)

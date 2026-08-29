@@ -124,15 +124,13 @@ func relatar_roubo() -> void:
 	_atualizar_mostrar_acao("relatar_roubo", Color.DEEP_SKY_BLUE)
 	esta_relatando_atualmente = true
 	# ir em direcao ao guarda
-	var direcao := global_position.direction_to(guarda.global_position)
-	mover(direcao.normalized(), velocidade)
+	mover_direcao_objeto(guarda, velocidade)
 
 func esconder_no_mercado() -> void:
 	_atualizar_mostrar_acao("esconder", Color.GREEN_YELLOW)
 	esta_escodendo_atualmente = true
 	# ir em direcao a dentro do mercado
-	var direcao := global_position.direction_to(waypoint_loja.global_position)
-	mover(direcao.normalized(), velocidade)
+	mover_direcao_objeto(waypoint_loja, velocidade)
 
 func ficar_escondido() -> void:
 	_atualizar_mostrar_acao("escondido", Color.WEB_GREEN)
@@ -142,17 +140,12 @@ func ficar_escondido() -> void:
 func retornar_waypoint_venda() -> void:
 	_atualizar_mostrar_acao("retornar venda", Color.MEDIUM_VIOLET_RED)
 	# ir em direcao a ao local de venda (frente do mercado)
-	var direcao := global_position.direction_to(waypoint_venda.global_position)
-	mover(direcao.normalized(), velocidade)
-	
+	mover_direcao_objeto(waypoint_venda, velocidade)
+
 func fugir() -> void:
 	_atualizar_mostrar_acao("fugir", Color.FIREBRICK)
 	esta_fugindo_atualmente = true
-	var direcao = global_position.direction_to(jogador.global_position)
-	# direcao horizontal oposta do jogador
-	direcao.x = -direcao.x
-	direcao.z = -direcao.z
-	mover(direcao, velocidade)
+	mover_direcao_oposta_objeto(jogador, velocidade)
 
 
 # Condicoes
@@ -220,9 +213,7 @@ func passou_tempo_escondido() -> bool:
 	return false
 
 func esta_dentro_mercado() -> bool:
-	var distancia := global_position.distance_squared_to(waypoint_loja.global_position)
-	return distancia < 1
+	return esta_perto_objeto(waypoint_loja)
 
 func esta_ponto_venda() -> bool:
-	var distancia := global_position.distance_squared_to(waypoint_venda.global_position) 
-	return distancia < 1
+	return esta_perto_objeto(waypoint_venda)
