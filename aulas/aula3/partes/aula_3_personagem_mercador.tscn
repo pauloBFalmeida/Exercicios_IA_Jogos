@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/partes/fsm.gd" id="3_jc3yu"]
 [ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/partes/bt.gd" id="4_e3xno"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_u7wxf"]
+[sub_resource type="BoxMesh" id="BoxMesh_e3xno"]
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
@@ -17,16 +17,16 @@ ring_segments = 4
 
 [node name="PersonagemMercador" unique_id=1405902387 instance=ExtResource("1_l64xm")]
 script = ExtResource("2_u17q1")
-cerebro = "FSM"
+cerebro = "BT"
 velocidade = 5.0
 visao_range = 5
 cor = Color(0.89158136, 0.74556154, 0.34056458, 1)
 
 [node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
-mesh = SubResource("BoxMesh_u7wxf")
+mesh = SubResource("BoxMesh_e3xno")
 
 [node name="SistemaVida" parent="." index="3" unique_id=1411459166]
-regenerar_vida_seg = 3.0
+regenerar_vida_seg = 4.0
 
 [node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=891523267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45484, 0)
@@ -42,6 +42,7 @@ text = "Mercador"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.248904, -1.2298646)
 visible = false
 billboard = 1
+modulate = Color(1, 0.80799997, 0.27999997, 1)
 text = "Quer comprar algo?"
 
 [node name="TimerVender" type="Timer" parent="Label3D_Vender" index="0" unique_id=982979164]

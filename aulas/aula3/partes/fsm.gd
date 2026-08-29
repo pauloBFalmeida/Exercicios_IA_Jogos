@@ -44,6 +44,10 @@ func executar_vender():
 		estado_atual = Estado.FUGIR
 	if condicao_jogadorforavista():
 		estado_atual = Estado.ESPERAR
+	if condicao_recebeudano():
+		estado_atual = Estado.ESCONDER
+	if condicao_roubodentrovista():
+		estado_atual = Estado.RELATAR
 
 func executar_relatar():
 	# comportamento do estado "Relatar"
@@ -53,6 +57,8 @@ func executar_relatar():
 		estado_atual = Estado.FUGIR
 	if condicao_avisouguarda():
 		estado_atual = Estado.RETORNAR
+	if condicao_recebeudano():
+		estado_atual = Estado.ESCONDER
 
 func executar_esconder():
 	# comportamento do estado "Esconder"
@@ -67,6 +73,8 @@ func executar_escondido():
 	# comportamento do estado "Escondido"
 	mercador.ficar_escondido()
 	# troca de estados
+	if condicao_vidamenorque30():
+		estado_atual = Estado.FUGIR
 	if condicao_escondidopor10segundos():
 		estado_atual = Estado.RETORNAR
 
@@ -78,6 +86,10 @@ func executar_retornar():
 		estado_atual = Estado.FUGIR
 	if condicao_estapontodevenda():
 		estado_atual = Estado.ESPERAR
+	if condicao_roubodentrovista():
+		estado_atual = Estado.RELATAR
+	if condicao_recebeudano():
+		estado_atual = Estado.ESCONDER
 
 func executar_fugir():
 	# comportamento do estado "Fugir"

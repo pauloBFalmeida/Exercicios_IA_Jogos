@@ -9,6 +9,7 @@ extends Personagem
 @export var free_cam: Freecam3D
 
 @onready var shape_cast_ataque: ShapeCast3D = $ShapeCastAtaque
+@onready var label_roubado: Label3D = $LabelRoubado
 
 func _ready() -> void:
 	super()
@@ -66,5 +67,21 @@ func atacar() -> void:
 			hit_body.levar_dano(dano_ataque)
 
 signal roubou
+
+@onready var label_roubado_pos_y := label_roubado.position.y
+
 func roubar() -> void:
 	roubou.emit()
+	label_roubado.show()
+	var pos_y := label_roubado_pos_y
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(
+		label_roubado, "position:y", 
+		pos_y + 0.5, 
+		1.0
+	).from(pos_y)
+	
+	await tween.finished
+	label_roubado.hide()
+	label_roubado.position.y = pos_y

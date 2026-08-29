@@ -7,8 +7,9 @@ extends Personagem
 @export var jogador : Jogador
 ## Guarda
 @export var guarda : Aula3Guarda
+@export var loja : Aula3Loja
 
-@export var waypoint_mercado : Node3D
+@export var waypoint_loja : Node3D
 @export var waypoint_venda : Node3D
 
 ## velocidade de movimento do mercador
@@ -46,7 +47,7 @@ var passou_tempo_escondido_ticket: bool = false
 func _ready() -> void:
 	super()
 	
-	_preparar_cerebro()
+	_preparar_cerebro(cerebro)
 	# alcance da visao
 	var torus_visao = mesh_alcance_visao.mesh as TorusMesh
 	torus_visao.inner_radius = visao_range - 0.25
@@ -57,19 +58,23 @@ func _ready() -> void:
 	# sistema de vida
 	sistema_vida.levou_dano.connect(func(): levou_dano_ticket = true )
 	#
-	timer_escondido.timeout.connect(func(): passou_tempo_escondido_ticket = true )
+	loja.mercador_ficou_tempo_na_loja.connect(func(): passou_tempo_escondido_ticket = true )
+	#timer_escondido.timeout.connect(func(): passou_tempo_escondido_ticket = true )
 	# 
 	jogador.roubou.connect(_jogador_roubou)
 
-func _preparar_cerebro() -> void:
+func _preparar_cerebro(_cerebro: String) -> void:
+	# atualiza o cerebro
+	cerebro = _cerebro
+	# desliga ambos
 	fsm.process_mode = Node.PROCESS_MODE_DISABLED
 	bt.process_mode = Node.PROCESS_MODE_DISABLED
-	
+	# liga o que for usar
 	if cerebro == "FSM":
 		fsm.process_mode = Node.PROCESS_MODE_INHERIT
 	elif cerebro == "BT":
 		bt.process_mode = Node.PROCESS_MODE_INHERIT
-	
+	# atualiza o titulo do personagem com o nome do cerebro em uso
 	label_3d_titulo.text += " (" + cerebro + ")"
 
 
@@ -82,9 +87,19 @@ func _process(delta: float) -> void:
 	if global_position.distance_squared_to(guarda.global_position) < 4:
 		guarda.avisar_roubo()
 		avisou_guarda_ticket = true
+	
+	#print("")
+	#print("esta_escodendo: ", esta_escodendo_atualmente)
+	#print("esta_fugindo: ", esta_fugindo_atualmente)
+	#print("esta_fugindo: ", esta_relatando_atualmente)
 
-func _atualizar_mostrar_acao(nome_acao: String) -> void:
+func _atualizar_mostrar_acao(nome_acao: String, cor_acao: Color = Color.WHITE) -> void:
 	label_3d_acao.text = "acao: " + nome_acao
+	label_3d_acao.modulate = cor_acao
+	# TODO: lugar melhor
+	esta_escodendo_atualmente = false
+	esta_fugindo_atualmente   = false
+	esta_relatando_atualmente = false
 
 func _jogador_roubou() -> void:
 	if jogador_dentro_visao():
@@ -96,31 +111,35 @@ func _jogador_roubou() -> void:
 # -----------------------------------------------------------------------------
 
 func esperar() -> void:
-	_atualizar_mostrar_acao("esperar")
+	_atualizar_mostrar_acao("esperar", Color.CORAL)
 	# ficar parado
 	parar_mover()
 
 func vender() -> void:
-	_atualizar_mostrar_acao("vender")
+	_atualizar_mostrar_acao("vender", Color.GOLD)
+	# ficar parado
+	parar_mover()
 	# olha para o jogador e fala de vender
 	look_at_horizontal(jogador.global_position)
 	label_3d_vender.show()
 	timer_vender.start()
 
 func relatar_roubo() -> void:
-	_atualizar_mostrar_acao("relatar_roubo")
+	_atualizar_mostrar_acao("relatar_roubo", Color.DEEP_SKY_BLUE)
+	esta_relatando_atualmente = true
 	# ir em direcao ao guarda
 	var direcao := global_position.direction_to(guarda.global_position)
 	mover(direcao.normalized(), velocidade)
 
 func esconder_no_mercado() -> void:
-	_atualizar_mostrar_acao("esconder")
+	_atualizar_mostrar_acao("esconder", Color.GREEN_YELLOW)
+	esta_escodendo_atualmente = true
 	# ir em direcao a dentro do mercado
-	var direcao := global_position.direction_to(waypoint_mercado.global_position)
+	var direcao := global_position.direction_to(waypoint_loja.global_position)
 	mover(direcao.normalized(), velocidade)
 
 func ficar_escondido() -> void:
-	_atualizar_mostrar_acao("escondido")
+	_atualizar_mostrar_acao("escondido", Color.WEB_GREEN)
 	# ficar parado
 	parar_mover()
 	# se o timer nao estiver contando, comece a contar
@@ -128,13 +147,14 @@ func ficar_escondido() -> void:
 		timer_escondido.start()
 
 func retornar_waypoint_venda() -> void:
-	_atualizar_mostrar_acao("retornar venda")
+	_atualizar_mostrar_acao("retornar venda", Color.MEDIUM_VIOLET_RED)
 	# ir em direcao a ao local de venda (frente do mercado)
 	var direcao := global_position.direction_to(waypoint_venda.global_position)
 	mover(direcao.normalized(), velocidade)
 	
 func fugir() -> void:
-	_atualizar_mostrar_acao("fugir")
+	_atualizar_mostrar_acao("fugir", Color.FIREBRICK)
+	esta_fugindo_atualmente = true
 	var direcao = global_position.direction_to(jogador.global_position)
 	# direcao horizontal oposta do jogador
 	direcao.x = -direcao.x
@@ -144,6 +164,17 @@ func fugir() -> void:
 
 # Condicoes
 # -----------------------------------------------------------------------------
+
+var esta_escodendo_atualmente: bool = false
+var esta_fugindo_atualmente: bool = false
+var esta_relatando_atualmente: bool = false
+
+func esta_escondendo() -> bool:
+	return esta_escodendo_atualmente
+func esta_fugindo() -> bool:
+	return esta_fugindo_atualmente
+func esta_relatando() -> bool:
+	return esta_relatando_atualmente
 
 ## Mercador tem menos de 30% de vida
 func pouca_vida() -> bool:
@@ -196,9 +227,9 @@ func passou_tempo_escondido() -> bool:
 	return false
 
 func esta_dentro_mercado() -> bool:
-	var distancia := global_position.distance_to(waypoint_mercado.global_position)
+	var distancia := global_position.distance_squared_to(waypoint_loja.global_position)
 	return distancia < 1
 
 func esta_ponto_venda() -> bool:
-	var distancia := global_position.distance_to(waypoint_venda.global_position) 
+	var distancia := global_position.distance_squared_to(waypoint_venda.global_position) 
 	return distancia < 1

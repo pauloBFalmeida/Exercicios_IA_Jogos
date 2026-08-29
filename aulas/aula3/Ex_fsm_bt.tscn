@@ -7,9 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://b53b03gubw7xn" path="res://aulas/aula3/partes/aula_3_personagem_mercador.tscn" id="4_vrtws"]
 [ext_resource type="PackedScene" uid="uid://cg5spb0so1oi1" path="res://aulas/aula3/partes/aula_3_personagem_guarda.tscn" id="5_yh3uo"]
 [ext_resource type="PackedScene" uid="uid://rrc3wp7siq5e" path="res://comum/locais/casa.tscn" id="6_545p4"]
+[ext_resource type="Script" uid="uid://dn4qvvolqh3ck" path="res://aulas/aula3/partes/loja.gd" id="8_sb2hf"]
+[ext_resource type="PackedScene" uid="uid://bqbpbb2nygxr3" path="res://addons/kenney_castle-kit/Models/GLB format/ground.glb" id="9_mibwx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xbrib"]
 radius = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sb2hf"]
+radius = 1.0
 
 [node name="ExercicioFSM_BT" type="Node3D" unique_id=1064108922]
 
@@ -17,7 +22,7 @@ radius = 3.0
 
 [node name="Jogador" parent="." unique_id=1405902387 node_paths=PackedStringArray("free_cam") instance=ExtResource("2_hlu0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.891174)
-velocidade = 4.0
+velocidade = 8.0
 dano_ataque = 25
 free_cam = NodePath("Camera3D")
 
@@ -59,25 +64,51 @@ shape = SubResource("SphereShape3D_xbrib")
 target_position = Vector3(0, 1, -3)
 debug_shape_custom_color = Color(0.89784014, 0, 0.096936174, 1)
 
-[node name="PersonagemMercador" parent="." unique_id=1489481207 node_paths=PackedStringArray("jogador", "guarda", "waypoint_mercado", "waypoint_venda") instance=ExtResource("4_vrtws")]
+[node name="LabelRoubado" type="Label3D" parent="Jogador" unique_id=1461391388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+visible = false
+modulate = Color(0.7607843, 0, 1, 1)
+text = "Roubado"
+
+[node name="PersonagemMercador" parent="." unique_id=1489481207 node_paths=PackedStringArray("jogador", "guarda", "loja", "waypoint_loja", "waypoint_venda") instance=ExtResource("4_vrtws")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
-cerebro = "BT"
+cerebro = "FSM"
 jogador = NodePath("../Jogador")
 guarda = NodePath("../PersonagemGuarda")
-waypoint_mercado = NodePath("../WaypointInteriorMercado")
+loja = NodePath("../Loja")
+waypoint_loja = NodePath("../Loja/WaypointInteriorLoja")
 waypoint_venda = NodePath("../WaypointVenda")
 
 [node name="PersonagemGuarda" parent="." unique_id=1800025862 node_paths=PackedStringArray("jogador") instance=ExtResource("5_yh3uo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
 jogador = NodePath("../Jogador")
 
-[node name="Mercado" parent="." unique_id=692387879 instance=ExtResource("6_545p4")]
+[node name="Loja" parent="." unique_id=692387879 instance=ExtResource("6_545p4")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -12)
+script = ExtResource("8_sb2hf")
+
+[node name="WaypointInteriorLoja" type="Node3D" parent="Loja" unique_id=1208603909]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, 0, 0, -0.10000038)
+
+[node name="Area3D" type="Area3D" parent="Loja/WaypointInteriorLoja" unique_id=748178932]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Loja/WaypointInteriorLoja/Area3D" unique_id=2144973283]
+shape = SubResource("SphereShape3D_sb2hf")
+debug_color = Color(0.58431375, 0.5529412, 0, 0.6039216)
+
+[node name="ground2" parent="Loja/WaypointInteriorLoja" unique_id=1384950366 instance=ExtResource("9_mibwx")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.01, 0)
+
+[node name="LabelTempoLoja" type="Label3D" parent="Loja" unique_id=1763352547]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, 0, 2.6666667, 0)
+text = "Tempo Dentro Loja:
+"
+font_size = 40
 
 [node name="WaypointVenda" type="Node3D" parent="." unique_id=61177773]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
 
-[node name="WaypointInteriorMercado" type="Node3D" parent="." unique_id=1208603909]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.3)
+[node name="ground2" parent="WaypointVenda" unique_id=972061158 instance=ExtResource("9_mibwx")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.01, 0)
 
 [connection signal="toggled" from="Jogador/Hud/ButtonCamSeguirJog" to="Jogador/Hud" method="_on_button_cam_seguir_jog_toggled"]
