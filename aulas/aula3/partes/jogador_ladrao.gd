@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		roubar()
 
 func atacar() -> void:
-	animacao_ataque()
+	await animacao_ataque()
 	# shape cast para detectar ataque
 	shape_cast_ataque.enabled = true
 	# forca atualizar para detectar hits agora (inves de no prox physics frame)
@@ -36,7 +36,8 @@ func atacar() -> void:
 		var hit_body := shape_cast_ataque.get_collider(i)
 		if hit_body is Personagem:
 			hit_body.levar_dano(dano_ataque)
-
+	# desativa o shape cast depois de verificar
+	shape_cast_ataque.enabled = false
 
 func roubar() -> void:
 	# emite o sinal que roubou (isso que realmente importa para coisas reagirem)

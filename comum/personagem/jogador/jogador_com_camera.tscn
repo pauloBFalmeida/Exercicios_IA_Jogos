@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://caumhll2fvjtl"]
+[gd_scene format=3 uid="uid://y0pbkwhki2s5"]
 
 [ext_resource type="PackedScene" uid="uid://b1w1yn4c4uls8" path="res://comum/personagem/jogador/jogador.tscn" id="1_mgtdw"]
 [ext_resource type="Script" uid="uid://bdo81qu3u0wbl" path="res://aulas/aula3/partes/hud.gd" id="2_4o4a5"]

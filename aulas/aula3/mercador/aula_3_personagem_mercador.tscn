@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/mercador/fsm.gd" id="3_jc3yu"]
 [ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/mercador/bt.gd" id="4_e3xno"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_e3xno"]
+[sub_resource type="BoxMesh" id="BoxMesh_ux5cj"]
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
@@ -23,7 +23,7 @@ visao_range = 5
 cor = Color(0.89158136, 0.74556154, 0.34056458, 1)
 
 [node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
-mesh = SubResource("BoxMesh_e3xno")
+mesh = SubResource("BoxMesh_ux5cj")
 
 [node name="SistemaVida" parent="." index="3" unique_id=1411459166]
 regenerar_vida_seg = 4.0
@@ -49,18 +49,30 @@ text = "Quer comprar algo?"
 wait_time = 0.1
 one_shot = true
 
-[node name="TimerEscondido" type="Timer" parent="." index="8" unique_id=906395941]
-wait_time = 10.0
-one_shot = true
-
-[node name="MeshAlcanceVisao" type="MeshInstance3D" parent="." index="9" unique_id=1314693939]
+[node name="MeshAlcanceVisao" type="MeshInstance3D" parent="." index="8" unique_id=1314693939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999998, 0)
 mesh = SubResource("TorusMesh_l64xm")
 
-[node name="FSM" type="Node" parent="." index="10" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
+[node name="FSM" type="Node" parent="." index="9" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
 script = ExtResource("3_jc3yu")
 mercador = NodePath("..")
 
-[node name="BT" type="Node" parent="." index="11" unique_id=2098172617 node_paths=PackedStringArray("mercador")]
+[node name="BT" type="Node" parent="." index="10" unique_id=2098172617 node_paths=PackedStringArray("mercador")]
 script = ExtResource("4_e3xno")
 mercador = NodePath("..")
+
+[node name="ItemListCerebros" type="ItemList" parent="." index="11" unique_id=645069797]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -93.0
+offset_right = 235.0
+grow_vertical = 0
+item_count = 3
+item_0/text = "Mercador"
+item_0/selectable = false
+item_0/disabled = true
+item_1/text = "BT - BehaviorTree"
+item_2/text = "FSM - Finite State Machine"
+
+[connection signal="item_selected" from="ItemListCerebros" to="." method="_on_item_list_cerebros_item_selected"]

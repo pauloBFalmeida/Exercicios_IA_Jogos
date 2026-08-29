@@ -23,12 +23,13 @@ extends Personagem
 @onready var fsm: Aula3_FSM = $FSM
 @onready var bt: Aula3_BT = $BT
 
+@onready var item_list_cerebros: ItemList = $ItemListCerebros
+
 @onready var label_3d_titulo: Label3D = $Label3D_Titulo
 @onready var label_3d_acao: Label3D = $Label3D_acao
 
 @onready var label_3d_vender: Label3D = $Label3D_Vender
 @onready var timer_vender: Timer = $Label3D_Vender/TimerVender
-@onready var timer_escondido: Timer = $TimerEscondido
 
 # TODO:
 # ao vender ele fica esperando só 2 condicoes, tem q colocar todas
@@ -57,10 +58,9 @@ func _ready() -> void:
 	timer_vender.timeout.connect(label_3d_vender.hide)
 	# sistema de vida
 	sistema_vida.levou_dano.connect(func(): levou_dano_ticket = true )
-	#
+	# tempo suficiente escondido
 	loja.mercador_ficou_tempo_na_loja.connect(func(): passou_tempo_escondido_ticket = true )
-	#timer_escondido.timeout.connect(func(): passou_tempo_escondido_ticket = true )
-	# 
+	# jogador roubou
 	jogador.roubou.connect(_jogador_roubou)
 
 func _preparar_cerebro(_cerebro: String) -> void:
@@ -75,23 +75,21 @@ func _preparar_cerebro(_cerebro: String) -> void:
 	elif cerebro == "BT":
 		bt.process_mode = Node.PROCESS_MODE_INHERIT
 	# atualiza o titulo do personagem com o nome do cerebro em uso
-	label_3d_titulo.text += " (" + cerebro + ")"
+	label_3d_titulo.text = "Mercador (%s)" % cerebro
 
+func _on_item_list_cerebros_item_selected(index: int) -> void:
+	# pega o texto do item selecionado
+	var texto := item_list_cerebros.get_item_text(index)
+	# pega a primeira palavra do item selecionado
+	var _cerebro: String = texto.split(" ")[0]
+	_preparar_cerebro(_cerebro)
 
-func _process(delta: float) -> void:
-	# input de ataque
-	if Input.is_action_just_pressed("acao"):
-		vender()
-	
+func _process(_delta: float) -> void:	
 	# TODO: melhorar avisar o guarda
 	if global_position.distance_squared_to(guarda.global_position) < 4:
 		guarda.avisar_roubo()
 		avisou_guarda_ticket = true
-	
-	#print("")
-	#print("esta_escodendo: ", esta_escodendo_atualmente)
-	#print("esta_fugindo: ", esta_fugindo_atualmente)
-	#print("esta_fugindo: ", esta_relatando_atualmente)
+
 
 func _atualizar_mostrar_acao(nome_acao: String, cor_acao: Color = Color.WHITE) -> void:
 	label_3d_acao.text = "acao: " + nome_acao
@@ -104,8 +102,6 @@ func _atualizar_mostrar_acao(nome_acao: String, cor_acao: Color = Color.WHITE) -
 func _jogador_roubou() -> void:
 	if jogador_dentro_visao():
 		roubou_dentro_visao_ticket = true
-
-
 
 # Acoes
 # -----------------------------------------------------------------------------
@@ -142,9 +138,6 @@ func ficar_escondido() -> void:
 	_atualizar_mostrar_acao("escondido", Color.WEB_GREEN)
 	# ficar parado
 	parar_mover()
-	# se o timer nao estiver contando, comece a contar
-	if timer_escondido.is_stopped():
-		timer_escondido.start()
 
 func retornar_waypoint_venda() -> void:
 	_atualizar_mostrar_acao("retornar venda", Color.MEDIUM_VIOLET_RED)
