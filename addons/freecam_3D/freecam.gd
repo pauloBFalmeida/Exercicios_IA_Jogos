@@ -63,6 +63,10 @@ func _setup_nodes() -> void:
 func _ready() -> void:
 	_setup_nodes.call_deferred()
 	_add_keybindings()
+	# Mostrar Comandos
+	display_message("TAB - Alternar Free Cam")
+	display_message("Espaço e Shift - Altura da Cam")
+	display_message("Scroll - Velocidade da Cam")
 
 
 func _process(delta: float) -> void:
