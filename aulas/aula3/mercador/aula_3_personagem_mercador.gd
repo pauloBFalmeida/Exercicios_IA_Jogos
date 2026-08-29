@@ -7,6 +7,7 @@ extends Personagem
 @export var jogador : Jogador
 ## Guarda
 @export var guarda : Aula3Guarda
+## Loja
 @export var loja : Aula3Loja
 
 @export var waypoint_loja : Node3D
@@ -14,7 +15,6 @@ extends Personagem
 
 ## velocidade de movimento do mercador
 @export var velocidade:= 5.0
-
 ## raio da visao mercador
 @export var visao_range: int = 5
 
@@ -31,18 +31,17 @@ extends Personagem
 @onready var label_3d_vender: Label3D = $Label3D_Vender
 @onready var timer_vender: Timer = $Label3D_Vender/TimerVender
 
-# TODO:
-# ao vender ele fica esperando só 2 condicoes, tem q colocar todas
+# ticket que quando for True eh consumido (vira False) apos a primeira verificacao
+var levou_dano_ticket: 				bool = false
+var roubou_dentro_visao_ticket: 	bool = false
+var avisou_guarda_ticket: 			bool = false
+var passou_tempo_escondido_ticket: 	bool = false
 
-## Cada vez que leva dano no sistema de vida, o ticket marca como true, ate ser consumido
-# TODO: o ticket fica e apos retornar ele foge
-var levou_dano_ticket: bool = false
-
-var roubou_dentro_visao_ticket: bool = false
-
-var avisou_guarda_ticket: bool = false
-
-var passou_tempo_escondido_ticket: bool = false
+# Sao True quando o estado delas esta acontecendo
+# esta_escodendo_atualmente somente eh true quando mercador esta executando fugir
+var esta_escodendo_atualmente: bool = false
+var esta_fugindo_atualmente: bool = false
+var esta_relatando_atualmente: bool = false
 
 
 func _ready() -> void:
@@ -84,12 +83,11 @@ func _on_item_list_cerebros_item_selected(index: int) -> void:
 	var _cerebro: String = texto.split(" ")[0]
 	_preparar_cerebro(_cerebro)
 
-func _process(_delta: float) -> void:	
-	# TODO: melhorar avisar o guarda
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	# se estiver perto do guarda, avisa do roubo
 	if esta_perto_objeto(guarda, 4):
-		guarda.avisar_roubo()
-		avisou_guarda_ticket = true
-
+		_avisar_guarda()
 
 func _atualizar_mostrar_acao(nome_acao: String, cor_acao: Color = Color.WHITE) -> void:
 	label_3d_acao.text = "acao: " + nome_acao
@@ -102,6 +100,10 @@ func _atualizar_mostrar_acao(nome_acao: String, cor_acao: Color = Color.WHITE) -
 func _jogador_roubou() -> void:
 	if jogador_dentro_visao():
 		roubou_dentro_visao_ticket = true
+
+func _avisar_guarda() -> void:
+	guarda.avisar_roubo()
+	avisou_guarda_ticket = true
 
 # Acoes
 # -----------------------------------------------------------------------------
@@ -150,10 +152,6 @@ func fugir() -> void:
 
 # Condicoes
 # -----------------------------------------------------------------------------
-
-var esta_escodendo_atualmente: bool = false
-var esta_fugindo_atualmente: bool = false
-var esta_relatando_atualmente: bool = false
 
 func esta_escondendo() -> bool:
 	return esta_escodendo_atualmente
