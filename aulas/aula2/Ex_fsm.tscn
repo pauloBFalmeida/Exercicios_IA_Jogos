@@ -19,4 +19,4 @@ outro_personagem = NodePath("../PersonagemRed")
 [node name="PersonagemRed" parent="." unique_id=614467689 node_paths=PackedStringArray("outro_personagem") instance=ExtResource("3_j7ahw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 outro_personagem = NodePath("../PersonagemBlue")
-cor = Color(0.9998743, 0.39784005, 0.32939905, 1)
+cor_personagem = Color(0.9998743, 0.39784005, 0.32939905, 1)

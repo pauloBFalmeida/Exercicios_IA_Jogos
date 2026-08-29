@@ -20,7 +20,7 @@ script = ExtResource("2_u17q1")
 cerebro = "BT"
 velocidade = 5.0
 visao_range = 5
-cor = Color(0.89158136, 0.74556154, 0.34056458, 1)
+cor_personagem = Color(0.89158136, 0.74556154, 0.34056458, 1)
 
 [node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
 mesh = SubResource("BoxMesh_ux5cj")

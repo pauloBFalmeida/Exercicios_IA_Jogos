@@ -2,7 +2,7 @@ class_name Personagem
 extends CharacterBody3D
 
 ## Cor desse personagem
-@export var cor := Color.SKY_BLUE
+@export var cor_personagem := Color.SKY_BLUE
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var mesh_bastao: MeshInstance3D = $MaoBastao/MeshBastao
@@ -29,7 +29,7 @@ func _ready_cor() -> void:
 	var mat = mesh.get_surface_override_material(0) as StandardMaterial3D
 	material = mat.duplicate()
 	# troca a cor do material para a cor do personagem
-	material.albedo_color = cor
+	material.albedo_color = cor_personagem
 	# coloca o material no mesh do feijao
 	mesh.set_surface_override_material(0, material)
 	
