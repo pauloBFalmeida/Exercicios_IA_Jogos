@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b1w1yn4c4uls8" path="res://comum/personagem/jogador/jogador.tscn" id="2_hlu0q"]
 [ext_resource type="Script" uid="uid://8vyuhyx0xogt" path="res://addons/freecam_3D/freecam.gd" id="2_iokim"]
 [ext_resource type="Script" uid="uid://bdo81qu3u0wbl" path="res://aulas/aula3/partes/hud.gd" id="4_28xmo"]
-[ext_resource type="PackedScene" uid="uid://b53b03gubw7xn" path="res://aulas/aula3/partes/aula_3_personagem_mercador.tscn" id="4_vrtws"]
+[ext_resource type="PackedScene" uid="uid://b53b03gubw7xn" path="res://aulas/aula3/mercador/aula_3_personagem_mercador.tscn" id="4_vrtws"]
 [ext_resource type="PackedScene" uid="uid://cg5spb0so1oi1" path="res://aulas/aula3/partes/aula_3_personagem_guarda.tscn" id="5_yh3uo"]
 [ext_resource type="PackedScene" uid="uid://rrc3wp7siq5e" path="res://comum/locais/casa.tscn" id="6_545p4"]
 [ext_resource type="Script" uid="uid://dn4qvvolqh3ck" path="res://aulas/aula3/partes/loja.gd" id="8_sb2hf"]

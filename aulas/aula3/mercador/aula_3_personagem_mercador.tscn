@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b53b03gubw7xn"]
 
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_l64xm"]
-[ext_resource type="Script" uid="uid://bd7enx8lt6t8r" path="res://aulas/aula3/partes/aula_3_personagem_mercador.gd" id="2_u17q1"]
-[ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/partes/fsm.gd" id="3_jc3yu"]
-[ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/partes/bt.gd" id="4_e3xno"]
+[ext_resource type="Script" uid="uid://bd7enx8lt6t8r" path="res://aulas/aula3/mercador/aula_3_personagem_mercador.gd" id="2_u17q1"]
+[ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/mercador/fsm.gd" id="3_jc3yu"]
+[ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/mercador/bt.gd" id="4_e3xno"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e3xno"]
 resource_local_to_scene = true
