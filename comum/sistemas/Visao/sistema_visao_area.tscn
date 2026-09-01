@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ecw5gmh433cd"]
 
-[ext_resource type="Script" uid="uid://0xq6a482k5xf" path="res://comum/sistemas/sistema_visao_area.gd" id="1_8sqhs"]
+[ext_resource type="Script" uid="uid://0xq6a482k5xf" path="res://comum/sistemas/Visao/sistema_visao_area.gd" id="1_8sqhs"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_pvw3j"]
 resource_local_to_scene = true

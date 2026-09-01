@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_l64xm"]
 [ext_resource type="Script" uid="uid://bd7enx8lt6t8r" path="res://aulas/aula3/mercador/aula_3_personagem_mercador.gd" id="2_u17q1"]
-[ext_resource type="PackedScene" uid="uid://ecw5gmh433cd" path="res://comum/sistemas/sistema_visao_area.tscn" id="3_gqeb8"]
+[ext_resource type="PackedScene" uid="uid://ecw5gmh433cd" path="res://comum/sistemas/Visao/sistema_visao_area.tscn" id="3_gqeb8"]
 [ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/mercador/fsm.gd" id="3_jc3yu"]
 [ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/mercador/bt.gd" id="4_e3xno"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_ux5cj"]
+[sub_resource type="BoxMesh" id="BoxMesh_gqeb8"]
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
@@ -16,23 +16,23 @@ cerebro = "BT"
 velocidade = 5.0
 cor_personagem = Color(0.89158136, 0.74556154, 0.34056458, 1)
 
-[node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
-mesh = SubResource("BoxMesh_ux5cj")
+[node name="MeshBastao" parent="Corpo/MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
+mesh = SubResource("BoxMesh_gqeb8")
 
-[node name="SistemaVida" parent="." index="3" unique_id=1411459166]
+[node name="SistemaVida" parent="." index="2" unique_id=1411459166]
 regenerar_vida_seg = 4.0
 
-[node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=891523267]
+[node name="Label3D_acao" type="Label3D" parent="." index="4" unique_id=891523267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45484, 0)
 billboard = 1
 text = "acao: "
 
-[node name="Label3D_Titulo" type="Label3D" parent="." index="6" unique_id=1161856396]
+[node name="Label3D_Titulo" type="Label3D" parent="." index="5" unique_id=1161856396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8340626, 0)
 billboard = 1
 text = "Mercador"
 
-[node name="Label3D_Vender" type="Label3D" parent="." index="7" unique_id=929990489]
+[node name="Label3D_Vender" type="Label3D" parent="." index="6" unique_id=929990489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.248904, -1.2298646)
 visible = false
 billboard = 1
@@ -43,17 +43,17 @@ text = "Quer comprar algo?"
 wait_time = 0.1
 one_shot = true
 
-[node name="SistemaVisaoArea" parent="." index="8" unique_id=1318402552 instance=ExtResource("3_gqeb8")]
+[node name="SistemaVisaoArea" parent="." index="7" unique_id=1318402552 instance=ExtResource("3_gqeb8")]
 
-[node name="FSM" type="Node" parent="." index="9" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
+[node name="FSM" type="Node" parent="." index="8" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
 script = ExtResource("3_jc3yu")
 mercador = NodePath("..")
 
-[node name="BT" type="Node" parent="." index="10" unique_id=2098172617 node_paths=PackedStringArray("mercador")]
+[node name="BT" type="Node" parent="." index="9" unique_id=2098172617 node_paths=PackedStringArray("mercador")]
 script = ExtResource("4_e3xno")
 mercador = NodePath("..")
 
-[node name="ItemListCerebros" type="ItemList" parent="." index="11" unique_id=645069797]
+[node name="ItemListCerebros" type="ItemList" parent="." index="10" unique_id=645069797]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

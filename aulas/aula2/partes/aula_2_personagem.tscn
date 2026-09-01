@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_orb4b"]
 [ext_resource type="Script" uid="uid://dq80lkb0fgyy8" path="res://aulas/aula2/partes/aula_2_personagem.gd" id="2_8xd02"]
-[ext_resource type="PackedScene" uid="uid://ecw5gmh433cd" path="res://comum/sistemas/sistema_visao_area.tscn" id="3_wlrl2"]
+[ext_resource type="PackedScene" uid="uid://ecw5gmh433cd" path="res://comum/sistemas/Visao/sistema_visao_area.tscn" id="3_wlrl2"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_w6cws"]
+[sub_resource type="BoxMesh" id="BoxMesh_wlrl2"]
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
@@ -18,17 +18,17 @@ velocidade_fugir = 5.0
 velocidade_perseguir = 3.0
 velocidade_patrulhar = 4.0
 
-[node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
-mesh = SubResource("BoxMesh_w6cws")
+[node name="MeshBastao" parent="Corpo/MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
+mesh = SubResource("BoxMesh_wlrl2")
 
-[node name="Label3D_acao" type="Label3D" parent="." index="5" unique_id=319886117]
+[node name="Label3D_acao" type="Label3D" parent="." index="4" unique_id=319886117]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.602667, 0)
 billboard = 1
 text = "acao:"
 
-[node name="SistemaVisaoArea" parent="." index="6" unique_id=1318402552 instance=ExtResource("3_wlrl2")]
+[node name="SistemaVisaoArea" parent="." index="5" unique_id=1318402552 instance=ExtResource("3_wlrl2")]
 
-[node name="MostrarWaypointPatrulha" type="Node" parent="." index="7" unique_id=43126788]
+[node name="MostrarWaypointPatrulha" type="Node" parent="." index="6" unique_id=43126788]
 editor_description = "Truque para manter a posição da sphere global, se fosse só filho do personagem iria se mover junto com ele"
 
 [node name="Sphere3D" type="CSGSphere3D" parent="MostrarWaypointPatrulha" index="0" unique_id=2055555484]
