@@ -4,14 +4,16 @@ extends CharacterBody3D
 ## Cor desse personagem
 @export var cor_personagem := Color.SKY_BLUE
 
-@onready var mesh: MeshInstance3D = $MeshInstance3D
-@onready var mesh_bastao: MeshInstance3D = $MaoBastao/MeshBastao
-var material: Material
+@onready var corpo: Node3D = $Corpo
+@onready var mesh: MeshInstance3D = $Corpo/MeshInstance3D
 
-@onready var mao_bastao: Node3D = $MaoBastao
+@onready var mesh_bastao: MeshInstance3D = $Corpo/MaoBastao/MeshBastao
+@onready var mao_bastao: Node3D = $Corpo/MaoBastao
 
 @onready var sistema_vida: SistemaVida = $SistemaVida
 @onready var label_vida: Label3D = $Label3D_vida
+
+var material: Material
 
 var mover_velocidade: float = 0.0
 var mover_direcao := Vector3.ZERO
@@ -151,8 +153,8 @@ func _animacao_levar_dano() -> void:
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(mesh, "scale", 
-		Vector3(1.2, 0.7, 1.2), 
+	tween.tween_property(corpo, "scale", 
+		Vector3(1.15, 0.85, 1.15), 
 		.15
 	)
 	# espera terminar
@@ -161,7 +163,7 @@ func _animacao_levar_dano() -> void:
 	var tween_volta := create_tween()
 	tween_volta.set_ease(Tween.EASE_OUT)
 	tween_volta.set_trans(Tween.TRANS_CUBIC)
-	tween_volta.tween_property(mesh, "scale",
+	tween_volta.tween_property(corpo, "scale",
 		 Vector3.ONE,
 		.2
 	).from_current()

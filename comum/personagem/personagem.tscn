@@ -21,28 +21,30 @@ script = ExtResource("1_2s6sl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rkp1i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1243407999]
+[node name="Corpo" type="Node3D" parent="." unique_id=565524857]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Corpo" unique_id=1243407999]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_p4ixc")
 surface_material_override/0 = SubResource("StandardMaterial3D_qtv0d")
 
-[node name="Rosto" type="Node3D" parent="MeshInstance3D" unique_id=1546902572]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.371139e-08, 0.5, -0.5)
+[node name="Rosto" type="Node3D" parent="Corpo" unique_id=1546902572]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.371139e-08, 1.5, -0.5)
 
-[node name="Sphere3DOlhoEsq" type="CSGSphere3D" parent="MeshInstance3D/Rosto" unique_id=312366091]
+[node name="Sphere3DOlhoEsq" type="CSGSphere3D" parent="Corpo/Rosto" unique_id=312366091]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.15000002, 0, -0.050000012)
 radius = 0.15
 rings = 12
 
-[node name="Sphere3DOlhoDir" type="CSGSphere3D" parent="MeshInstance3D/Rosto" unique_id=1096106731]
+[node name="Sphere3DOlhoDir" type="CSGSphere3D" parent="Corpo/Rosto" unique_id=1096106731]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.14999999, 0, -0.050000012)
 radius = 0.15
 rings = 12
 
-[node name="MaoBastao" type="Node3D" parent="." unique_id=1567190570]
+[node name="MaoBastao" type="Node3D" parent="Corpo" unique_id=1567190570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, 0)
 
-[node name="MeshBastao" type="MeshInstance3D" parent="MaoBastao" unique_id=13564532]
+[node name="MeshBastao" type="MeshInstance3D" parent="Corpo/MaoBastao" unique_id=13564532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07677102, 0.4528153, -0.13665104)
 mesh = SubResource("BoxMesh_smq05")
 
