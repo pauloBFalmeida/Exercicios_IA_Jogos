@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b6ypxm1fkqw11" path="res://comum/personagem/personagem.tscn" id="1_l64xm"]
 [ext_resource type="Script" uid="uid://bd7enx8lt6t8r" path="res://aulas/aula3/mercador/aula_3_personagem_mercador.gd" id="2_u17q1"]
+[ext_resource type="PackedScene" uid="uid://ecw5gmh433cd" path="res://comum/sistemas/sistema_visao_area.tscn" id="3_gqeb8"]
 [ext_resource type="Script" uid="uid://6gquaxgcegfm" path="res://aulas/aula3/mercador/fsm.gd" id="3_jc3yu"]
 [ext_resource type="Script" uid="uid://bu4tq7xqafqe4" path="res://aulas/aula3/mercador/bt.gd" id="4_e3xno"]
 
@@ -9,17 +10,10 @@
 resource_local_to_scene = true
 size = Vector3(0.15, 1, 0.15)
 
-[sub_resource type="TorusMesh" id="TorusMesh_l64xm"]
-resource_local_to_scene = true
-inner_radius = 1.0
-outer_radius = 1.25
-ring_segments = 4
-
 [node name="PersonagemMercador" unique_id=1405902387 instance=ExtResource("1_l64xm")]
 script = ExtResource("2_u17q1")
 cerebro = "BT"
 velocidade = 5.0
-visao_range = 5
 cor_personagem = Color(0.89158136, 0.74556154, 0.34056458, 1)
 
 [node name="MeshBastao" parent="MaoBastao" parent_id_path=PackedInt32Array(1567190570) index="0" unique_id=13564532]
@@ -49,9 +43,7 @@ text = "Quer comprar algo?"
 wait_time = 0.1
 one_shot = true
 
-[node name="MeshAlcanceVisao" type="MeshInstance3D" parent="." index="8" unique_id=1314693939]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999998, 0)
-mesh = SubResource("TorusMesh_l64xm")
+[node name="SistemaVisaoArea" parent="." index="8" unique_id=1318402552 instance=ExtResource("3_gqeb8")]
 
 [node name="FSM" type="Node" parent="." index="9" unique_id=1594021568 node_paths=PackedStringArray("mercador")]
 script = ExtResource("3_jc3yu")

@@ -21,7 +21,8 @@ extends Personagem
 
 @onready var label_acao: Label3D = $Label3D_acao
 
-@onready var mesh_alcance_visao: MeshInstance3D = $MeshAlcanceVisao
+@onready var sistema_visao_area: SistemaVisaoArea = $SistemaVisaoArea
+
 @onready var sphere_waypoint_patrulha: CSGSphere3D = $MostrarWaypointPatrulha/Sphere3D
 
 var waypoint_patrulhar: Vector3 = Vector3.INF
@@ -48,10 +49,7 @@ func _ready() -> void:
 	# waypoint de patrulha
 	sphere_waypoint_patrulha.material = material
 	# alcance da visao
-	var torus_visao = mesh_alcance_visao.mesh as TorusMesh
-	torus_visao.inner_radius = perseguir_range - 0.25
-	torus_visao.outer_radius = perseguir_range
-	torus_visao.material = material
+	sistema_visao_area.ajustar_raio_visao(perseguir_range)
 
 
 func _process(_delta: float) -> void:
@@ -81,9 +79,9 @@ func _process(_delta: float) -> void:
 	
 	# Mostra o alcance da visao se for Patrulha ou Perseguir
 	if estado_atual in [Estado.PATRULHAR, Estado.PERSEGUIR]:
-		mesh_alcance_visao.show()
+		sistema_visao_area.show()
 	else:
-		mesh_alcance_visao.hide()
+		sistema_visao_area.hide()
 	# Mostra o waypoint se for Patrulha
 	if estado_atual == Estado.PATRULHAR:
 		sphere_waypoint_patrulha.show()

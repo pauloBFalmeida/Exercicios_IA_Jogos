@@ -15,10 +15,6 @@ extends Personagem
 
 ## velocidade de movimento do mercador
 @export var velocidade:= 5.0
-## raio da visao mercador
-@export var visao_range: int = 5
-
-@onready var mesh_alcance_visao: MeshInstance3D = $MeshAlcanceVisao
 
 @onready var fsm: Aula3_FSM = $FSM
 @onready var bt: Aula3_BT = $BT
@@ -30,6 +26,8 @@ extends Personagem
 
 @onready var label_3d_vender: Label3D = $Label3D_Vender
 @onready var timer_vender: Timer = $Label3D_Vender/TimerVender
+
+@onready var sistema_visao_area: SistemaVisaoArea = $SistemaVisaoArea
 
 # ticket que quando for True eh consumido (vira False) apos a primeira verificacao
 var levou_dano_ticket: 				bool = false
@@ -48,11 +46,6 @@ func _ready() -> void:
 	super()
 	
 	_preparar_cerebro(cerebro)
-	# alcance da visao
-	var torus_visao = mesh_alcance_visao.mesh as TorusMesh
-	torus_visao.inner_radius = visao_range - 0.25
-	torus_visao.outer_radius = visao_range
-	torus_visao.material = material
 	# vender
 	timer_vender.timeout.connect(label_3d_vender.hide)
 	# sistema de vida
@@ -170,8 +163,7 @@ func muita_vida() -> bool:
 
 ## Jogador esta dentro da area de visao
 func jogador_dentro_visao() -> bool:
-	var distancia := global_position.distance_to(jogador.global_position) 
-	return distancia < visao_range
+	return sistema_visao_area.esta_dentro_visao(jogador)
 
 ## Jogador esta fora da area de visao
 func jogador_fora_visao() -> bool:

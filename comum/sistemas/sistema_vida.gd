@@ -1,5 +1,5 @@
-extends Node
 class_name SistemaVida
+extends Node
 
 signal atualizou_vida(vida_atual: float)
 signal levou_dano
